@@ -1,0 +1,17 @@
+{
+  "general electric": [
+    "ge"
+  ],
+  "fujifilm": [
+    "fuji[\\s-]+film",
+    "fuji"
+  ],
+  "hp": [
+    "hewlett[\\s-]*packard"
+  ],
+  "konica minolta": [
+    "konica[\\s-]+minolta",
+    "konica",
+    "minolta"
+  ]
+}
