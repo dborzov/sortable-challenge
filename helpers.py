@@ -14,6 +14,7 @@ class JSONL:
 
 
 listings = JSONL('data/listings.txt')
+products = JSONL('data/products.txt')
 
 """
 count_values is a wrapper around value counter
