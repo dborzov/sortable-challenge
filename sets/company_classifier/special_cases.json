@@ -1,16 +1,18 @@
 {
   "general electric": [
+    "general[\\s-]*electric",
     "ge"
   ],
   "fujifilm": [
-    "fuji[\\s-]+film",
+    "fuji[\\s-]*film",
     "fuji"
   ],
   "hp": [
+    "hp",
     "hewlett[\\s-]*packard"
   ],
   "konica minolta": [
-    "konica[\\s-]+minolta",
+    "konica[\\s-]*minolta",
     "konica",
     "minolta"
   ]
