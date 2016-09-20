@@ -13,6 +13,16 @@ class DecisionTree:
     def match(self, listing):
         return self.matcher(listing)
 
+    def traverse(self, indent=""):
+        string = indent+ "{}".format(self.label)
+        if len(self.children)==0:
+            print string
+            return
+        print string +  " ->"
+        for child in self.children:
+            child.traverse(indent="   "+indent)
+
+
     def apply(self, listing):
         if self.result:
             return self.result
@@ -36,6 +46,8 @@ class DecisionTree:
         return matches[0].apply(listing)
 
 root = DecisionTree(lambda x: True, label="Decision Tree Root")
+
+# regexes for manufacturers
 manufacturers = collections.defaultdict(set)
 for p in products:
     mf = p.get("manufacturer","").lower().rstrip()
@@ -60,9 +72,10 @@ def factory_manufacturer_matcher(name, regexes):
         return False
     return mf_matcher
 
+# manufacturer filter level
 for mf, regexes in manufacturers.iteritems():
     matcher = factory_manufacturer_matcher(mf, regexes)
     label = "is manufacturer \"{}\"?".format(mf)
     node = DecisionTree(matcher, label=label)
-    node.result = "the manufacturer is {}!".format(mf)
+    node.result = mf
     root.children.append(node)
