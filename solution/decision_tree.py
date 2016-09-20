@@ -48,13 +48,19 @@ class DecisionTree:
 root = DecisionTree(lambda x: True, label="Decision Tree Root")
 
 # regexes for manufacturers
+# manufacturers is a dict with keys a manufacturer id/names
+# and values a set of regexes
 manufacturers = collections.defaultdict(set)
+mf_families = collections.defaultdict(set)
 for p in products:
     mf = p.get("manufacturer","").lower().rstrip()
     if mf == "":
         continue
     manufacturers[mf].add(mf)
-
+    family = p.get("family","").lower().rstrip()
+    if family=="":
+        continue
+    mf_families[mf].add(family)
 for case in manufacturer_special_cases:
     if not case in manufacturers:
         continue
@@ -72,10 +78,26 @@ def factory_manufacturer_matcher(name, regexes):
         return False
     return mf_matcher
 
+def factory_family_matcher(name, regexes):
+    def family_matcher(listing):
+        key = listing.get("title","").lower()
+        for regex in regexes:
+            if re.search(r'\b'+ regex + r'\b', key):
+                return True
+        return False
+    return mf_matcher
+
 # manufacturer filter level
 for mf, regexes in manufacturers.iteritems():
-    matcher = factory_manufacturer_matcher(mf, regexes)
+    mf_matcher = factory_manufacturer_matcher(mf, regexes)
     label = "is manufacturer \"{}\"?".format(mf)
-    node = DecisionTree(matcher, label=label)
-    node.result = mf
+    node = DecisionTree(mf_matcher, label=label)
     root.children.append(node)
+    for family in mf_families[mf]:
+        f_matcher = factory_family_matcher(family, [family])
+        label = "is family \"{}\"?".format(family)
+        fm_node = DecisionTree(f_matcher, label=label)
+        fm_node.result = "mf: {}, f: {}".format(mf, family)
+        node.children.append(fm_node)
+    if len(mf_families[mf])==0:
+        node.result = mf
