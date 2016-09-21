@@ -1,3 +1,3 @@
-import decision_tree
+from build import decision_tree
 
-decision_tree.root.traverse()
+decision_tree.traverse()

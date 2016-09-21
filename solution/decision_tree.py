@@ -1,103 +1,135 @@
 from io_helpers import *
 
-class UnRecognizedListing(Exception):
+class UnrecognizedListing(Exception):
     pass
 
-class DecisionTree:
-    def __init__(self, matcher_func, label=""):
-        self.matcher = matcher_func
+class NoMatchesForListing(UnrecognizedListing):
+    pass
+
+class TreeNode:
+    def __init__(self, label):
         self.children = []
         self.label = label
-        self.result = None
-
-    def match(self, listing):
-        return self.matcher(listing)
+        self.product_counter = 0
+        self.listing_counter = 0
+        self.regexes = None
+        self.parent = None
 
     def traverse(self, indent=""):
-        string = indent+ "{}".format(self.label)
-        print string
+        print
+        print indent+ "{} [{} ps, {} ls]".format(self.label, self.product_counter, self.listing_counter)
+        if self.regexes:
+            print indent+ " (regex matchers: \"{}\")".format("\", \"".join(self.regexes))
         if len(self.children)==0:
             return
         print indent+ " --|"
+        self.children = sorted(self.children, key=lambda x: -x.listing_counter)
         for child in self.children:
             child.traverse(indent="   | "+indent)
+        print indent+ "   -"
 
-
-    def apply(self, listing):
-        if self.result:
-            return self.result
+    def search(self, listing):
         matches = []
         for child in self.children:
             if child.match(listing):
                 matches.append(child)
         if len(matches)==0:
-            raise UnRecognizedListing({
+            raise NoMatchesForListing({
                 "reason": "No matches",
                 "decision_tree_node": self.label,
                 "listing": listing
             })
         if len(matches)>1:
-            raise UnRecognizedListing({
+            raise UnrecognizedListing({
                 "reason": "Several matches, should be excluding",
                 "decision_tree_node": self.label,
                 "matches": [m.label for m in matches],
                 "listing": listing
             })
-        return matches[0].apply(listing)
+        return matches[0].search(listing)
 
-root = DecisionTree(lambda x: True, label="Decision Tree Root")
+    def apply_product(self, product):
+        for child in self.children:
+            if child.match(product):
+                return child
+        return self
 
-# regexes for manufacturers
-# manufacturers is a dict with keys a manufacturer id/names
-# and values a set of regexes
-manufacturers = collections.defaultdict(set)
-mf_families = collections.defaultdict(set)
-for p in products:
-    mf = p.get("manufacturer","").lower().rstrip()
-    if mf == "":
-        continue
-    manufacturers[mf].add(mf)
-    family = p.get("family","").lower().rstrip()
-    if family=="":
-        continue
-    mf_families[mf].add(family)
-for case in manufacturer_special_cases:
-    if not case in manufacturers:
-        continue
-    for regex in manufacturer_special_cases[case]:
-        manufacturers[case].add(regex)
+    def add_child(self, node):
+        self.children.append(node)
+        node.parent = self
 
+class FamilyNode(TreeNode):
+    def __init__(self, label, regexes):
+        TreeNode.__init__(self, "Is family \"{}\"?".format(label))
+        escaped_regexes = set([el.lower().rstrip() for el in regexes])
+        self.regexes = escaped_regexes
 
-
-def factory_manufacturer_matcher(name, regexes):
-    def mf_matcher(listing):
-        key = listing.get("manufacturer","").lower()
-        for regex in regexes:
-            if re.search(r'\b'+ regex + r'\b', key):
-                return True
-        return False
-    return mf_matcher
-
-def factory_family_matcher(name, regexes):
-    def family_matcher(listing):
+    def match(self, listing):
         key = listing.get("title","").lower()
-        for regex in regexes:
+        for regex in self.regexes:
             if re.search(r'\b'+ regex + r'\b', key):
                 return True
         return False
-    return mf_matcher
 
-# manufacturer filter level
-for mf, regexes in manufacturers.iteritems():
-    mf_matcher = factory_manufacturer_matcher(mf, regexes)
-    label = "is manufacturer \"{}\"?".format(mf)
-    node = DecisionTree(mf_matcher, label=label)
-    root.children.append(node)
-    for family in mf_families[mf]:
-        f_matcher = factory_family_matcher(family, [family])
-        label = "is family \"{}\"?".format(family)
-        fm_node = DecisionTree(f_matcher, label=label)
-        fm_node.result = "mf: {}, f: {}".format(mf, family)
-        node.children.append(fm_node)
-    if len(mf_families[mf])==0:
-        node.result = mf
+
+class ManufacturerNode(TreeNode):
+    def __init__(self, label, regexes):
+        TreeNode.__init__(self, "Is manufacturer \"{}\"?".format(label))
+        escaped_regexes = set([el.lower().rstrip() for el in regexes])
+        self.regexes = escaped_regexes
+        self.undefined_family_node = None
+
+    def traverse(self, indent=""):
+        TreeNode.traverse(self,indent=indent)
+        if self.undefined_family_node:
+            self.undefined_family_node.traverse(indent="   | "+indent)
+
+
+    def match(self, listing):
+        key = listing.get("manufacturer","").lower().rstrip()
+        if not re.search("\w", key):
+            key = listing.get("title","").lower()
+        for regex in self.regexes:
+            pattern = r'\b'+ regex + r'\b' if len(regex)<5 else regex
+            if re.search(pattern, key):
+                return True
+        return False
+
+    def undefined_family(self):
+        if self.undefined_family_node:
+            return self.undefined_family_node
+        self.undefined_family_node = FamilyNode("Family NA", set())
+        self.undefined_family_node.label = "Unspecified family products"
+        self.undefined_family_node.parent = self
+        return self.undefined_family_node
+
+    def search(self, listing):
+        try:
+            return TreeNode.search(self, listing)
+        except NoMatchesForListing as e:
+            if not self.undefined_family_node:
+                raise e
+            return self.undefined_family_node.search(listing)
+class ModelNode(TreeNode):
+    def __init__(self, result):
+        self.label = result["model"]
+        self.result = result
+        self.regexes = []
+        for token in self.result["model"].split():
+                self.regexes.append(token.replace("-","[-\s]*"))
+        self.listings = []
+        self.listing_counter = 0
+
+    def match(self, listing):
+        key = listing.get("title","").lower()
+        for regex in self.regexes:
+            if not re.search(r'\b'+ regex + r'\b', key):
+                return False
+        return True
+
+    def traverse(self, indent=""):
+        print indent + self.label + "[{}]".format(len(self.listings))
+
+    def search(self, listing):
+        self.listings.append(listing)
+        return self

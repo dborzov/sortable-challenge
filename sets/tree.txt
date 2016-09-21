@@ -1,64 +1,1049 @@
-Decision Tree Root
+
+root [743 ps, 152 ls]
  --|
-   | is manufacturer "kyocera"?
+
+   | Is manufacturer "olympus"? [94 ps, 101 ls]
+   |  (regex matchers: "olympus")
    |  --|
-   |    | is family "finecam"?
-   | is manufacturer "pentax"?
+
+   |    | Is family "stylus"? [14 ps, 61 ls]
+   |    |  (regex matchers: "stylus")
+   |    |  --|
+   |    |    | 7030[17]
+   |    |    | 7000[12]
+   |    |    | 7010[11]
+   |    |    | 9000[9]
+   |    |    | 7040[7]
+   |    |    | 5010[5]
+   |    |    | Tough-3000[0]
+   |    |    | 9010[0]
+   |    |    | Tough 6000[0]
+   |    |    | Tough 8000[0]
+   |    |    | Tough 6020[0]
+   |    |    | 550WP[0]
+   |    |    | Tough 8010[0]
+   |    |    | Tough 6010[0]
+   |    |    -
+
+   |    | Is family "tough"? [1 ps, 0 ls]
+   |    |  (regex matchers: "tough")
+   |    |  --|
+   |    |    | TG-810[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [79 ps, 40 ls]
+   |    |  --|
+   |    |    | mju 7010[11]
+   |    |    | mju 9010[8]
+   |    |    | mju 5010[8]
+   |    |    | mju 9000[5]
+   |    |    | mju 7000[5]
+   |    |    | mju 7040[3]
+   |    |    | T110[0]
+   |    |    | C-2500 L[0]
+   |    |    | FE-5010[0]
+   |    |    | C-2000 Zoom[0]
+   |    |    | mju Tough 8010[0]
+   |    |    | PEN E-P2[0]
+   |    |    | T100[0]
+   |    |    | VG110[0]
+   |    |    | mju 7030[0]
+   |    |    | mju Tough 6010[0]
+   |    |    | C-3040 Zoom[0]
+   |    |    | VG120[0]
+   |    |    | C-2100 UZ[0]
+   |    |    | SP-610 UZ[0]
+   |    |    | C-3000 Zoom[0]
+   |    |    | E-450[0]
+   |    |    | PEN E-P1[0]
+   |    |    | FE-4040[0]
+   |    |    | D-450 Zoom[0]
+   |    |    | mju 550WP[0]
+   |    |    | FE-5000[0]
+   |    |    | PEN E-PL1s[0]
+   |    |    | E-600[0]
+   |    |    | SP-600 UZ[0]
+   |    |    | FE-5020[0]
+   |    |    | D-500L[0]
+   |    |    | SP-800 UZ[0]
+   |    |    | TG310[0]
+   |    |    | D-400 Zoom[0]
+   |    |    | XZ-1[0]
+   |    |    | E-5[0]
+   |    |    | TG-610[0]
+   |    |    | D-490 Zoom[0]
+   |    |    | E-620[0]
+   |    |    | C990Z[0]
+   |    |    | D-460 Zoom[0]
+   |    |    | PEN E-PL1[0]
+   |    |    | mju Tough 6000[0]
+   |    |    | D-600L[0]
+   |    |    | mju Tough 8000[0]
+   |    |    | C-2040 Zoom[0]
+   |    |    | C1400XL[0]
+   |    |    | FE-5050[0]
+   |    |    | mju Tough 6020[0]
+   |    |    | E-100 RS[0]
+   |    |    | X560 WP[0]
+   |    |    | FE-3010[0]
+   |    |    | SZ-30MR[0]
+   |    |    | FE5030[0]
+   |    |    | D-620L[0]
+   |    |    | D-340R[0]
+   |    |    | C900Z[0]
+   |    |    | C-21[0]
+   |    |    | FE-5040[0]
+   |    |    | SZ10[0]
+   |    |    | FE-47[0]
+   |    |    | D-340L[0]
+   |    |    | C-2020 Zoom[0]
+   |    |    | FE-45[0]
+   |    |    | C-3030 Zoom[0]
+   |    |    | D-200L[0]
+   |    |    | VR320[0]
+   |    |    | PEN E-PL2[0]
+   |    |    | VR330[0]
+   |    |    | FE-3000[0]
+   |    |    | SP-590 UZ[0]
+   |    |    | mju Tough 3000[0]
+   |    |    | E-10[0]
+   |    |    | FE-4030[0]
+   |    |    | D-300L[0]
+   |    |    | C920Z[0]
+   |    |    | D-360L[0]
+   |    |    | SZ-20[0]
+   |    |    -
+
+   | Is manufacturer "canon"? [84 ps, 26 ls]
+   |  (regex matchers: "canon")
    |  --|
-   |    | is family "optio"?
-   | is manufacturer "agfa"?
+
+   |    | Is family "ixus"? [5 ps, 26 ls]
+   |    |  (regex matchers: "ixus")
+   |    |  --|
+   |    |    | 105[26]
+   |    |    | 310 HS[0]
+   |    |    | 220 HS[0]
+   |    |    | 300 HS[0]
+   |    |    | 115 HS[0]
+   |    |    -
+
+   |    | Is family "digital ixus"? [9 ps, 0 ls]
+   |    |  (regex matchers: "digital ixus")
+   |    |  --|
+   |    |    | 130 IS[0]
+   |    |    | 95 IS[0]
+   |    |    | 200 IS[0]
+   |    |    | 990 IS[0]
+   |    |    | 210 IS[0]
+   |    |    | 110 IS[0]
+   |    |    | 100 IS[0]
+   |    |    | 1000 HS[0]
+   |    |    | 120 IS[0]
+   |    |    -
+
+   |    | Is family "powershot"? [46 ps, 0 ls]
+   |    |  (regex matchers: "powershot")
+   |    |  --|
+   |    |    | SD980 IS[0]
+   |    |    | A5 Zoom[0]
+   |    |    | A5[0]
+   |    |    | A3300 IS[0]
+   |    |    | A3200 IS[0]
+   |    |    | G1[0]
+   |    |    | S90[0]
+   |    |    | A3000 IS[0]
+   |    |    | A800[0]
+   |    |    | S100[0]
+   |    |    | A1200[0]
+   |    |    | G12[0]
+   |    |    | SX210 IS[0]
+   |    |    | A490[0]
+   |    |    | Pro70[0]
+   |    |    | A2200[0]
+   |    |    | SX130 IS[0]
+   |    |    | SD4000 IS[0]
+   |    |    | SX220 HS[0]
+   |    |    | SX200 IS[0]
+   |    |    | G11[0]
+   |    |    | 350[0]
+   |    |    | SD940 IS[0]
+   |    |    | A3100 IS[0]
+   |    |    | SD3500 IS[0]
+   |    |    | SD970 IS[0]
+   |    |    | SX30 IS[0]
+   |    |    | SD960 IS[0]
+   |    |    | SD4500 IS[0]
+   |    |    | SX20 IS[0]
+   |    |    | A50[0]
+   |    |    | A495[0]
+   |    |    | A480[0]
+   |    |    | SD1400 IS[0]
+   |    |    | SD1200 IS[0]
+   |    |    | A1100 IS[0]
+   |    |    | A2100 IS[0]
+   |    |    | D10[0]
+   |    |    | S95[0]
+   |    |    | SX120 IS[0]
+   |    |    | SD780 IS[0]
+   |    |    | SX230 HS[0]
+   |    |    | SD1300 IS[0]
+   |    |    | S10[0]
+   |    |    | S20[0]
+   |    |    | 600[0]
+   |    |    -
+
+   |    | Is family "eos"? [8 ps, 0 ls]
+   |    |  (regex matchers: "eos")
+   |    |  --|
+   |    |    | 60D[0]
+   |    |    | Kiss Digital X3[0]
+   |    |    | 1100D[0]
+   |    |    | 550D[0]
+   |    |    | 7D[0]
+   |    |    | 600D[0]
+   |    |    | D30[0]
+   |    |    | 500D[0]
+   |    |    -
+
+   |    | Is family "elph"? [3 ps, 0 ls]
+   |    |  (regex matchers: "elph")
+   |    |  --|
+   |    |    | 500 HS[0]
+   |    |    | 300 HS[0]
+   |    |    | 100 HS[0]
+   |    |    -
+
+   |    | Is family "ixy"? [5 ps, 0 ls]
+   |    |  (regex matchers: "ixy")
+   |    |  --|
+   |    |    | 200F[0]
+   |    |    | 10S[0]
+   |    |    | 400F[0]
+   |    |    | 30S[0]
+   |    |    | 50S[0]
+   |    |    -
+
+   |    | Is family "rebel"? [4 ps, 0 ls]
+   |    |  (regex matchers: "rebel")
+   |    |  --|
+   |    |    | T1i[0]
+   |    |    | T2i[0]
+   |    |    | T3i[0]
+   |    |    | T3[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [4 ps, 0 ls]
+   |    |  --|
+   |    |    | D6000[0]
+   |    |    | D2000[0]
+   |    |    | EOS-1D Mark IV[0]
+   |    |    | Kiss X4[0]
+   |    |    -
+
+   | Is manufacturer "leica"? [8 ps, 12 ls]
+   |  (regex matchers: "leica")
    |  --|
-   |    | is family "ephoto"?
-   | is manufacturer "epson"?
+
+   |    | Is family "d-lux"? [1 ps, 11 ls]
+   |    |  (regex matchers: "d-lux")
+   |    |  --|
+   |    |    | 5[11]
+   |    |    -
+
+   |    | Is family "digilux"? [2 ps, 1 ls]
+   |    |  (regex matchers: "digilux")
+   |    |  --|
+   |    |    | 4.3[1]
+   |    |    | Zoom[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [5 ps, 0 ls]
+   |    |  --|
+   |    |    | Digilux[0]
+   |    |    | V-LUX 20[0]
+   |    |    | X1[0]
+   |    |    | V-Lux 2[0]
+   |    |    | M9[0]
+   |    |    -
+
+   | Is manufacturer "nikon"? [51 ps, 6 ls]
+   |  (regex matchers: "nikon")
    |  --|
-   |    | is family "photopc"?
-   | is manufacturer "samsung"?
-   | is manufacturer "hp"?
+
+   |    | Is family "coolpix"? [43 ps, 6 ls]
+   |    |  (regex matchers: "coolpix")
+   |    |  --|
+   |    |    | 950[2]
+   |    |    | 990[1]
+   |    |    | 800[1]
+   |    |    | 300[1]
+   |    |    | 880[1]
+   |    |    | S6100[0]
+   |    |    | 900S[0]
+   |    |    | L100[0]
+   |    |    | S4100[0]
+   |    |    | 100[0]
+   |    |    | S5100[0]
+   |    |    | S640[0]
+   |    |    | S1000pj[0]
+   |    |    | S4000[0]
+   |    |    | S620[0]
+   |    |    | L19[0]
+   |    |    | S8000[0]
+   |    |    | 900[0]
+   |    |    | S630[0]
+   |    |    | S3100[0]
+   |    |    | L110[0]
+   |    |    | S1100pj[0]
+   |    |    | S70[0]
+   |    |    | S3000[0]
+   |    |    | L120[0]
+   |    |    | S570[0]
+   |    |    | S8100[0]
+   |    |    | S220[0]
+   |    |    | P300[0]
+   |    |    | L24[0]
+   |    |    | S6000[0]
+   |    |    | S9100[0]
+   |    |    | S80[0]
+   |    |    | P500[0]
+   |    |    | P90[0]
+   |    |    | P100[0]
+   |    |    | L20[0]
+   |    |    | L21[0]
+   |    |    | S230[0]
+   |    |    | 600[0]
+   |    |    | L22[0]
+   |    |    | 700[0]
+   |    |    | P7000[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [8 ps, 0 ls]
+   |    |  --|
+   |    |    | D5100[0]
+   |    |    | D3S[0]
+   |    |    | D7000[0]
+   |    |    | D3100[0]
+   |    |    | D3000[0]
+   |    |    | D1[0]
+   |    |    | D300S[0]
+   |    |    | D5000[0]
+   |    |    -
+
+   | Is manufacturer "fujifilm"? [97 ps, 3 ls]
+   |  (regex matchers: "fuji[\s-]*film", "fuji")
    |  --|
-   |    | is family "photosmart"?
-   | is manufacturer "sanyo"?
-   | is manufacturer "canon"?
+
+   |    | Is family "finepix"? [86 ps, 3 ls]
+   |    |  (regex matchers: "finepix")
+   |    |  --|
+   |    |    | 40i[2]
+   |    |    | 1300[1]
+   |    |    | T205[0]
+   |    |    | 1500[0]
+   |    |    | Z900EXR[0]
+   |    |    | AX305[0]
+   |    |    | A170[0]
+   |    |    | S2500HD[0]
+   |    |    | AX300[0]
+   |    |    | S1500[0]
+   |    |    | 4700 Zoom[0]
+   |    |    | A100[0]
+   |    |    | JX200[0]
+   |    |    | 4900 Zoom[0]
+   |    |    | 2400 Zoom[0]
+   |    |    | JZ500[0]
+   |    |    | AV250[0]
+   |    |    | S3400[0]
+   |    |    | S2990[0]
+   |    |    | 1200[0]
+   |    |    | AV205[0]
+   |    |    | Z33WP[0]
+   |    |    | J30[0]
+   |    |    | 1700 Zoom[0]
+   |    |    | Z808EXR[0]
+   |    |    | S4050[0]
+   |    |    | JX400[0]
+   |    |    | S1800[0]
+   |    |    | AV255[0]
+   |    |    | S1 Pro[0]
+   |    |    | F305EXR[0]
+   |    |    | F70EXR[0]
+   |    |    | T300[0]
+   |    |    | AX355[0]
+   |    |    | AX350[0]
+   |    |    | S200EXR[0]
+   |    |    | F80EXR[0]
+   |    |    | S3350[0]
+   |    |    | S4000[0]
+   |    |    | T200[0]
+   |    |    | Z800EXR[0]
+   |    |    | AV200[0]
+   |    |    | Z35[0]
+   |    |    | JX300[0]
+   |    |    | S2950[0]
+   |    |    | Z300[0]
+   |    |    | S3200[0]
+   |    |    | F550 EXR[0]
+   |    |    | S2600HD[0]
+   |    |    | JX305[0]
+   |    |    | JX350[0]
+   |    |    | XP10[0]
+   |    |    | HS10[0]
+   |    |    | S3300[0]
+   |    |    | Z700EXR[0]
+   |    |    | 2900Z[0]
+   |    |    | JX205[0]
+   |    |    | F500 EXR[0]
+   |    |    | 1400 Zoom[0]
+   |    |    | HS20[0]
+   |    |    | S1600[0]
+   |    |    | Z30[0]
+   |    |    | 700[0]
+   |    |    | JX355[0]
+   |    |    | S2800HD[0]
+   |    |    | S1880[0]
+   |    |    | JZ505[0]
+   |    |    | Z91[0]
+   |    |    | HS11[0]
+   |    |    | F200EXR[0]
+   |    |    | JX250[0]
+   |    |    | X100[0]
+   |    |    | HS22[0]
+   |    |    | S2900HD[0]
+   |    |    | S3450[0]
+   |    |    | T305[0]
+   |    |    | Z90[0]
+   |    |    | F300EXR[0]
+   |    |    | 2700[0]
+   |    |    | XP11[0]
+   |    |    | Z37[0]
+   |    |    | S1770[0]
+   |    |    | S3250[0]
+   |    |    | A150[0]
+   |    |    | XP30[0]
+   |    |    | JX405[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [11 ps, 0 ls]
+   |    |  --|
+   |    |    | MX-2700[0]
+   |    |    | MX-700[0]
+   |    |    | MX-2900 Zoom[0]
+   |    |    | DS-260HD[0]
+   |    |    | MX-1200[0]
+   |    |    | DS-300[0]
+   |    |    | MX-600 Zoom[0]
+   |    |    | MX-1400[0]
+   |    |    | MX-1700[0]
+   |    |    | MX-1500[0]
+   |    |    | MX-500[0]
+   |    |    -
+
+   | Is manufacturer "epson"? [11 ps, 3 ls]
+   |  (regex matchers: "epson")
    |  --|
-   |    | is family "ixus"?
-   |    | is family "elph"?
-   |    | is family "powershot"?
-   |    | is family "eos"?
-   |    | is family "ixy"?
-   |    | is family "rebel"?
-   |    | is family "digital ixus"?
-   | is manufacturer "ricoh"?
-   | is manufacturer "fujifilm"?
+
+   |    | Is family "photopc"? [9 ps, 3 ls]
+   |    |  (regex matchers: "photopc")
+   |    |  --|
+   |    |    | 700[2]
+   |    |    | 650[1]
+   |    |    | 550[0]
+   |    |    | 500[0]
+   |    |    | 850 Zoom[0]
+   |    |    | 750 Zoom[0]
+   |    |    | 3000 Zoom[0]
+   |    |    | 600[0]
+   |    |    | 800[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [2 ps, 0 ls]
+   |    |  --|
+   |    |    | R-D1x[0]
+   |    |    | C900Z[0]
+   |    |    -
+
+   | Is manufacturer "konica minolta"? [5 ps, 1 ls]
+   |  (regex matchers: "konica", "konica[\s-]*minolta", "minolta")
    |  --|
-   |    | is family "finepix"?
-   | is manufacturer "kodak"?
+
+   |    | Is family "dimage"? [4 ps, 1 ls]
+   |    |  (regex matchers: "dimage")
+   |    |  --|
+   |    |    | 2300[1]
+   |    |    | 2330[0]
+   |    |    | EX 1500 Zoom[0]
+   |    |    | EX 1500 Wide[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [1 ps, 0 ls]
+   |    |  --|
+   |    |    | RD-3000[0]
+   |    |    -
+
+   | Is manufacturer "hp"? [7 ps, 0 ls]
+   |  (regex matchers: "hewlett[\s-]*packard", "hp")
    |  --|
-   |    | is family "easyshare"?
-   | is manufacturer "nikon"?
+
+   |    | Is family "photosmart"? [7 ps, 0 ls]
+   |    |  (regex matchers: "photosmart")
+   |    |  --|
+   |    |    | C618[0]
+   |    |    | C500[0]
+   |    |    | C20[0]
+   |    |    | C315[0]
+   |    |    | C200[0]
+   |    |    | C215[0]
+   |    |    | C30[0]
+   |    |    -
+   |    -
+
+   | Is manufacturer "general electric"? [0 ps, 0 ls]
+   |  (regex matchers: "general[\s-]*electric", "ge")
+
+   | Is manufacturer "sony"? [81 ps, 0 ls]
+   |  (regex matchers: "sony")
    |  --|
-   |    | is family "coolpix"?
-   | is manufacturer "casio"?
+
+   |    | Is family "cyber-shot"? [42 ps, 0 ls]
+   |    |  (regex matchers: "cyber-shot")
+   |    |  --|
+   |    |    | DSC-W310[0]
+   |    |    | DSC-WX5[0]
+   |    |    | DSC-S930[0]
+   |    |    | DSC-D700[0]
+   |    |    | DSC-H20[0]
+   |    |    | DSC-TX7[0]
+   |    |    | DSC-G3[0]
+   |    |    | DSC-T900[0]
+   |    |    | DSC-W290[0]
+   |    |    | DSC-HX7v[0]
+   |    |    | DSC-W380[0]
+   |    |    | DSC-S30[0]
+   |    |    | DSC-S980[0]
+   |    |    | DSC-F505V[0]
+   |    |    | DSC-F55V[0]
+   |    |    | DSC-W230[0]
+   |    |    | DSC-F55[0]
+   |    |    | DSC-W370[0]
+   |    |    | DSC-S2000[0]
+   |    |    | DSC-HX5v[0]
+   |    |    | DSC-HX5[0]
+   |    |    | DSC-T90[0]
+   |    |    | DSC-W320[0]
+   |    |    | DSC-W180[0]
+   |    |    | DSC-W350[0]
+   |    |    | DSC-S70[0]
+   |    |    | DSC-H55[0]
+   |    |    | DSC-S50[0]
+   |    |    | DSC-D770[0]
+   |    |    | DSC-TX1[0]
+   |    |    | DSC-S2100[0]
+   |    |    | DSC-S950[0]
+   |    |    | DSC-P1[0]
+   |    |    | DSC-TX5[0]
+   |    |    | DSC-W220[0]
+   |    |    | DSC-T99[0]
+   |    |    | DSC-W330[0]
+   |    |    | DSC-HX1[0]
+   |    |    | DSC-TX100v[0]
+   |    |    | DSC-WX1[0]
+   |    |    | DSC-TX9[0]
+   |    |    | DSC-F505[0]
+   |    |    -
+
+   |    | Is family "cybershot"? [14 ps, 0 ls]
+   |    |  (regex matchers: "cybershot")
+   |    |  --|
+   |    |    | DSC-HX100v[0]
+   |    |    | TX10[0]
+   |    |    | W580[0]
+   |    |    | WX7[0]
+   |    |    | WX10[0]
+   |    |    | W510[0]
+   |    |    | T110[0]
+   |    |    | W570[0]
+   |    |    | DSC-HX9v[0]
+   |    |    | DSC-W530[0]
+   |    |    | WX9[0]
+   |    |    | H70[0]
+   |    |    | W520[0]
+   |    |    | W560[0]
+   |    |    -
+
+   |    | Is family "alpha"? [13 ps, 0 ls]
+   |    |  (regex matchers: "alpha")
+   |    |  --|
+   |    |    | NEX-3[0]
+   |    |    | DSLR-A380[0]
+   |    |    | DSLR-A230[0]
+   |    |    | DSLR-A850[0]
+   |    |    | NEX-5[0]
+   |    |    | DSLR-A450[0]
+   |    |    | DSLR-A560[0]
+   |    |    | DSLR-A580[0]
+   |    |    | DSLR-A290[0]
+   |    |    | DSLR-A550[0]
+   |    |    | DSLR-A330[0]
+   |    |    | DSLR-A500[0]
+   |    |    | DSLR-A390[0]
+   |    |    -
+
+   |    | Is family "mavica"? [10 ps, 0 ls]
+   |    |  (regex matchers: "mavica")
+   |    |  --|
+   |    |    | FD-95[0]
+   |    |    | FD-71[0]
+   |    |    | FD-81[0]
+   |    |    | FD-90[0]
+   |    |    | FD-73[0]
+   |    |    | FD-88[0]
+   |    |    | CD1000[0]
+   |    |    | FD-91[0]
+   |    |    | FD-83[0]
+   |    |    | FD-85[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [2 ps, 0 ls]
+   |    |  --|
+   |    |    | SLT-A33[0]
+   |    |    | SLT-A55[0]
+   |    |    -
+
+   | Is manufacturer "samsung"? [70 ps, 0 ls]
+   |  (regex matchers: "samsung")
+
+   |    | Unspecified family products [70 ps, 0 ls]
+   |    |  --|
+   |    |    | TL240[0]
+   |    |    | TL220[0]
+   |    |    | HZ15W[0]
+   |    |    | ST10[0]
+   |    |    | PL100[0]
+   |    |    | ES70[0]
+   |    |    | PL51[0]
+   |    |    | TL350[0]
+   |    |    | CL5[0]
+   |    |    | ES55[0]
+   |    |    | HZ50W[0]
+   |    |    | SL620[0]
+   |    |    | SL605[0]
+   |    |    | ES73[0]
+   |    |    | WB550[0]
+   |    |    | ST550[0]
+   |    |    | HZ10W[0]
+   |    |    | TL320[0]
+   |    |    | SL202[0]
+   |    |    | SH100[0]
+   |    |    | WB500[0]
+   |    |    | NX10[0]
+   |    |    | WB600[0]
+   |    |    | WB2000[0]
+   |    |    | ES17[0]
+   |    |    | AQ100[0]
+   |    |    | ST50[0]
+   |    |    | SL202[0]
+   |    |    | SL820[0]
+   |    |    | NX100[0]
+   |    |    | ST500[0]
+   |    |    | WB210[0]
+   |    |    | PL170[0]
+   |    |    | ES15[0]
+   |    |    | EX1[0]
+   |    |    | TL225[0]
+   |    |    | ST700[0]
+   |    |    | WP10[0]
+   |    |    | ST5500[0]
+   |    |    | WB650[0]
+   |    |    | PL70[0]
+   |    |    | ST5000[0]
+   |    |    | HZ30W[0]
+   |    |    | WB5500[0]
+   |    |    | CL80[0]
+   |    |    | SL720[0]
+   |    |    | NX11[0]
+   |    |    | PL210[0]
+   |    |    | ST60[0]
+   |    |    | PL150[0]
+   |    |    | PL10[0]
+   |    |    | PL50[0]
+   |    |    | TL500[0]
+   |    |    | ST65[0]
+   |    |    | PL200[0]
+   |    |    | NX5[0]
+   |    |    | TL210[0]
+   |    |    | SL102[0]
+   |    |    | SL30[0]
+   |    |    | ST6500[0]
+   |    |    | ES30[0]
+   |    |    | PL120[0]
+   |    |    | ST95[0]
+   |    |    | SL203[0]
+   |    |    | HZ35W[0]
+   |    |    | WB700[0]
+   |    |    | WB1000[0]
+   |    |    | TL205[0]
+   |    |    | TL105[0]
+   |    |    | TL100[0]
+   |    |    -
+
+   | Is manufacturer "casio"? [43 ps, 0 ls]
+   |  (regex matchers: "casio")
    |  --|
-   |    | is family "exilim"?
-   | is manufacturer "leica"?
+
+   |    | Is family "exilim"? [30 ps, 0 ls]
+   |    |  (regex matchers: "exilim")
+   |    |  --|
+   |    |    | EX-H20g[0]
+   |    |    | EX-Z29[0]
+   |    |    | EX-FC100[0]
+   |    |    | EX-Z2000[0]
+   |    |    | EX-Z400[0]
+   |    |    | EX-FC150[0]
+   |    |    | ZR100[0]
+   |    |    | EX-Z270[0]
+   |    |    | EX-Z90[0]
+   |    |    | EX-S7[0]
+   |    |    | EX-FH25[0]
+   |    |    | EX-ZR10[0]
+   |    |    | EX-Z33[0]
+   |    |    | EX-G1[0]
+   |    |    | EX-S200[0]
+   |    |    | EX-Z800[0]
+   |    |    | EX-H30[0]
+   |    |    | EX-H5[0]
+   |    |    | EX-S12[0]
+   |    |    | EX-S5[0]
+   |    |    | EX-Z280[0]
+   |    |    | EX-Z550[0]
+   |    |    | EX-Z35[0]
+   |    |    | EX-H15[0]
+   |    |    | EX-H10[0]
+   |    |    | EX-Z16[0]
+   |    |    | EX-FH100[0]
+   |    |    | EX-FS10[0]
+   |    |    | TRYX[0]
+   |    |    | EX-Z2300[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [13 ps, 0 ls]
+   |    |  --|
+   |    |    | QV-5000SX[0]
+   |    |    | QV-5500SX[0]
+   |    |    | QV-2000UX[0]
+   |    |    | QV-7000SX[0]
+   |    |    | QV-2300UX[0]
+   |    |    | QV-3000EX[0]
+   |    |    | QV-8000SX[0]
+   |    |    | QV-300[0]
+   |    |    | QV-3EX[0]
+   |    |    | QV-700[0]
+   |    |    | QV-770[0]
+   |    |    | QV-2800UX[0]
+   |    |    | XV-3[0]
+   |    |    -
+
+   | Is manufacturer "kodak"? [51 ps, 0 ls]
+   |  (regex matchers: "kodak")
    |  --|
-   |    | is family "d-lux"?
-   |    | is family "digilux"?
-   | is manufacturer "olympus"?
+
+   |    | Is family "easyshare"? [26 ps, 0 ls]
+   |    |  (regex matchers: "easyshare")
+   |    |  --|
+   |    |    | M575[0]
+   |    |    | C140[0]
+   |    |    | M550[0]
+   |    |    | Z981[0]
+   |    |    | M381[0]
+   |    |    | Mini M200[0]
+   |    |    | Z990 MAX[0]
+   |    |    | M577[0]
+   |    |    | C143[0]
+   |    |    | Sport C123[0]
+   |    |    | M380[0]
+   |    |    | M532[0]
+   |    |    | C1530[0]
+   |    |    | M341[0]
+   |    |    | M590[0]
+   |    |    | M340[0]
+   |    |    | C142[0]
+   |    |    | Z950[0]
+   |    |    | M531[0]
+   |    |    | Z980[0]
+   |    |    | M530[0]
+   |    |    | M580[0]
+   |    |    | Z915[0]
+   |    |    | Z1485 IS[0]
+   |    |    | M320[0]
+   |    |    | M552[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [25 ps, 0 ls]
+   |    |  --|
+   |    |    | DC3400[0]
+   |    |    | DC200 plus[0]
+   |    |    | DC260[0]
+   |    |    | DCS520[0]
+   |    |    | DCS560[0]
+   |    |    | DCS620x[0]
+   |    |    | DC290[0]
+   |    |    | DCS330[0]
+   |    |    | DC5000[0]
+   |    |    | DC215[0]
+   |    |    | DC3200[0]
+   |    |    | DCS460[0]
+   |    |    | DCS620[0]
+   |    |    | DCS315[0]
+   |    |    | DC4800[0]
+   |    |    | DC200[0]
+   |    |    | DC3800[0]
+   |    |    | DC265[0]
+   |    |    | DC240[0]
+   |    |    | DC220[0]
+   |    |    | DCS420[0]
+   |    |    | Slice[0]
+   |    |    | DC280[0]
+   |    |    | DCS660[0]
+   |    |    | DC210 plus[0]
+   |    |    -
+
+   | Is manufacturer "toshiba"? [6 ps, 0 ls]
+   |  (regex matchers: "toshiba")
+
+   |    | Unspecified family products [6 ps, 0 ls]
+   |    |  --|
+   |    |    | PDR-M60[0]
+   |    |    | PDR-M5[0]
+   |    |    | PDR-M1[0]
+   |    |    | PDR-M4[0]
+   |    |    | PDR-M3[0]
+   |    |    | PDR-M70[0]
+   |    |    -
+
+   | Is manufacturer "agfa"? [7 ps, 0 ls]
+   |  (regex matchers: "agfa")
    |  --|
-   |    | is family "stylus"?
-   |    | is family "tough"?
-   | is manufacturer "sony"?
+
+   |    | Is family "ephoto"? [6 ps, 0 ls]
+   |    |  (regex matchers: "ephoto")
+   |    |  --|
+   |    |    | 1280[0]
+   |    |    | CL30 Clik![0]
+   |    |    | CL30[0]
+   |    |    | CL18[0]
+   |    |    | 1680[0]
+   |    |    | CL50[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [1 ps, 0 ls]
+   |    |  --|
+   |    |    | DC-600uw[0]
+   |    |    -
+
+   | Is manufacturer "panasonic"? [80 ps, 0 ls]
+   |  (regex matchers: "panasonic")
    |  --|
-   |    | is family "alpha"?
-   |    | is family "cybershot"?
-   |    | is family "mavica"?
-   |    | is family "cyber-shot"?
-   | is manufacturer "konica minolta"?
+
+   |    | Is family "lumix"? [80 ps, 0 ls]
+   |    |  (regex matchers: "lumix")
+   |    |  --|
+   |    |    | DMC-FX580[0]
+   |    |    | DMC-TZ20[0]
+   |    |    | DMC-S1[0]
+   |    |    | DMC-TZ8[0]
+   |    |    | DMC-FX48[0]
+   |    |    | DMC-FX70[0]
+   |    |    | DMC-FH22[0]
+   |    |    | DMC-FX60[0]
+   |    |    | DMC-FH5[0]
+   |    |    | DMC-FP7[0]
+   |    |    | DMC-ZX1[0]
+   |    |    | DMC-GH1[0]
+   |    |    | DMC-FX78[0]
+   |    |    | DMC-GF1[0]
+   |    |    | DMC-FT10[0]
+   |    |    | DMC-FS12[0]
+   |    |    | DMC-GF2[0]
+   |    |    | DMC-FS25[0]
+   |    |    | DMC-F3[0]
+   |    |    | DMC-FS6[0]
+   |    |    | DMC-FZ38[0]
+   |    |    | DMC-FH20[0]
+   |    |    | DMC-FX77[0]
+   |    |    | DMC-TZ6[0]
+   |    |    | DMC-ZS7[0]
+   |    |    | DMC-ZS6[0]
+   |    |    | DMC-ZS5[0]
+   |    |    | DMC-FS10[0]
+   |    |    | DMC-GH2[0]
+   |    |    | DMC-TZ10[0]
+   |    |    | DMC-G10[0]
+   |    |    | DMC-FP3[0]
+   |    |    | DMC-FZ35[0]
+   |    |    | DMC-TS3[0]
+   |    |    | DMC-TS1[0]
+   |    |    | DMC-FS62[0]
+   |    |    | DMC-FP2[0]
+   |    |    | DMC-FZ40[0]
+   |    |    | DMC-FX75[0]
+   |    |    | DMC-FH27[0]
+   |    |    | DMC-FS33[0]
+   |    |    | DMC-FX550[0]
+   |    |    | DMC-FP5[0]
+   |    |    | DMC-ZR3[0]
+   |    |    | DMC-G2[0]
+   |    |    | DMC-FH1[0]
+   |    |    | DMC-FP8[0]
+   |    |    | DMC-FX700[0]
+   |    |    | DMC-FP1[0]
+   |    |    | DMC-F2[0]
+   |    |    | DMC-LS85[0]
+   |    |    | DMC-ZS10[0]
+   |    |    | DMC-LX5[0]
+   |    |    | DMC-FS30[0]
+   |    |    | DMC-FT1[0]
+   |    |    | DMC-FX68[0]
+   |    |    | DMC-TS10[0]
+   |    |    | DMC-TS2[0]
+   |    |    | DMC-ZS8[0]
+   |    |    | DMC-ZX3[0]
+   |    |    | DMC-FS7[0]
+   |    |    | DMC-FT2[0]
+   |    |    | DMC-FX40[0]
+   |    |    | DMC-FX66[0]
+   |    |    | DMC-FS42[0]
+   |    |    | DMC-FX65[0]
+   |    |    | DMC-FH25[0]
+   |    |    | DMC-ZR1[0]
+   |    |    | DMC-FZ45[0]
+   |    |    | DMC-S3[0]
+   |    |    | DMC-ZS3[0]
+   |    |    | DMC-FS15[0]
+   |    |    | DMC-FT3[0]
+   |    |    | DMC-FH3[0]
+   |    |    | DMC-TZ7[0]
+   |    |    | DMC-FZ100[0]
+   |    |    | DMC-FH2[0]
+   |    |    | DMC-FS11[0]
+   |    |    | DMC-TZ18[0]
+   |    |    | DMC-ZS1[0]
+   |    |    -
+   |    -
+
+   | Is manufacturer "pentax"? [23 ps, 0 ls]
+   |  (regex matchers: "pentax")
    |  --|
-   |    | is family "dimage"?
-   | is manufacturer "toshiba"?
-   | is manufacturer "sigma"?
-   | is manufacturer "contax"?
-   | is manufacturer "panasonic"?
+
+   |    | Is family "optio"? [16 ps, 0 ls]
+   |    |  (regex matchers: "optio")
+   |    |  --|
+   |    |    | WS80[0]
+   |    |    | E70[0]
+   |    |    | H90[0]
+   |    |    | I-10[0]
+   |    |    | E80[0]
+   |    |    | E85[0]
+   |    |    | RS1000[0]
+   |    |    | M85[0]
+   |    |    | P70[0]
+   |    |    | P80[0]
+   |    |    | M90[0]
+   |    |    | S1[0]
+   |    |    | W90[0]
+   |    |    | WG-1 GPS[0]
+   |    |    | WG-1[0]
+   |    |    | W80[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [7 ps, 0 ls]
+   |    |  --|
+   |    |    | X70[0]
+   |    |    | K-r[0]
+   |    |    | EI-200[0]
+   |    |    | K-5[0]
+   |    |    | X90[0]
+   |    |    | K-x[0]
+   |    |    | K-7[0]
+   |    |    -
+
+   | Is manufacturer "kyocera"? [2 ps, 0 ls]
+   |  (regex matchers: "kyocera")
    |  --|
-   |    | is family "lumix"?
+
+   |    | Is family "finecam"? [1 ps, 0 ls]
+   |    |  (regex matchers: "finecam")
+   |    |  --|
+   |    |    | 3300[0]
+   |    |    -
+   |    -
+
+   |    | Unspecified family products [1 ps, 0 ls]
+   |    |  --|
+   |    |    | Yashica Finecam 3300[0]
+   |    |    -
+
+   | Is manufacturer "ricoh"? [14 ps, 0 ls]
+   |  (regex matchers: "ricoh")
+
+   |    | Unspecified family products [14 ps, 0 ls]
+   |    |  --|
+   |    |    | GR Digital III[0]
+   |    |    | RDC-6000[0]
+   |    |    | GXR (A12)[0]
+   |    |    | CX2[0]
+   |    |    | RDC-5000[0]
+   |    |    | CX3[0]
+   |    |    | RDC-5300[0]
+   |    |    | CX5[0]
+   |    |    | RDC-4300[0]
+   |    |    | CX4[0]
+   |    |    | RDC-200G[0]
+   |    |    | RDC-7[0]
+   |    |    | CX1[0]
+   |    |    | RDC-i700[0]
+   |    |    -
+
+   | Is manufacturer "sigma"? [4 ps, 0 ls]
+   |  (regex matchers: "sigma")
+
+   |    | Unspecified family products [4 ps, 0 ls]
+   |    |  --|
+   |    |    | DP2s[0]
+   |    |    | DP2X[0]
+   |    |    | DP1s[0]
+   |    |    | DP1x[0]
+   |    |    -
+
+   | Is manufacturer "sanyo"? [4 ps, 0 ls]
+   |  (regex matchers: "sanyo")
+
+   |    | Unspecified family products [4 ps, 0 ls]
+   |    |  --|
+   |    |    | VPC-Z400[0]
+   |    |    | VPC-X350[0]
+   |    |    | DSC-V100 / X100[0]
+   |    |    | DSC-SX1Z[0]
+   |    |    -
+
+   | Is manufacturer "contax"? [1 ps, 0 ls]
+   |  (regex matchers: "contax")
+
+   |    | Unspecified family products [1 ps, 0 ls]
+   |    |  --|
+   |    |    | N Digital[0]
+   |    |    -
+   -
