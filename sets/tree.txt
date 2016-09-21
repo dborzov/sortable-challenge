@@ -1,0 +1,64 @@
+Decision Tree Root
+ --|
+   | is manufacturer "kyocera"?
+   |  --|
+   |    | is family "finecam"?
+   | is manufacturer "pentax"?
+   |  --|
+   |    | is family "optio"?
+   | is manufacturer "agfa"?
+   |  --|
+   |    | is family "ephoto"?
+   | is manufacturer "epson"?
+   |  --|
+   |    | is family "photopc"?
+   | is manufacturer "samsung"?
+   | is manufacturer "hp"?
+   |  --|
+   |    | is family "photosmart"?
+   | is manufacturer "sanyo"?
+   | is manufacturer "canon"?
+   |  --|
+   |    | is family "ixus"?
+   |    | is family "elph"?
+   |    | is family "powershot"?
+   |    | is family "eos"?
+   |    | is family "ixy"?
+   |    | is family "rebel"?
+   |    | is family "digital ixus"?
+   | is manufacturer "ricoh"?
+   | is manufacturer "fujifilm"?
+   |  --|
+   |    | is family "finepix"?
+   | is manufacturer "kodak"?
+   |  --|
+   |    | is family "easyshare"?
+   | is manufacturer "nikon"?
+   |  --|
+   |    | is family "coolpix"?
+   | is manufacturer "casio"?
+   |  --|
+   |    | is family "exilim"?
+   | is manufacturer "leica"?
+   |  --|
+   |    | is family "d-lux"?
+   |    | is family "digilux"?
+   | is manufacturer "olympus"?
+   |  --|
+   |    | is family "stylus"?
+   |    | is family "tough"?
+   | is manufacturer "sony"?
+   |  --|
+   |    | is family "alpha"?
+   |    | is family "cybershot"?
+   |    | is family "mavica"?
+   |    | is family "cyber-shot"?
+   | is manufacturer "konica minolta"?
+   |  --|
+   |    | is family "dimage"?
+   | is manufacturer "toshiba"?
+   | is manufacturer "sigma"?
+   | is manufacturer "contax"?
+   | is manufacturer "panasonic"?
+   |  --|
+   |    | is family "lumix"?

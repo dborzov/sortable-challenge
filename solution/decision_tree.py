@@ -15,12 +15,12 @@ class DecisionTree:
 
     def traverse(self, indent=""):
         string = indent+ "{}".format(self.label)
+        print string
         if len(self.children)==0:
-            print string
             return
-        print string +  " ->"
+        print indent+ " --|"
         for child in self.children:
-            child.traverse(indent="   "+indent)
+            child.traverse(indent="   | "+indent)
 
 
     def apply(self, listing):
