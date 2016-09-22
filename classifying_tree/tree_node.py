@@ -149,4 +149,10 @@ class ModelNode(TreeNode):
 
     def search(self, listing):
         self.listings.append(listing)
+        cur = self
+        while(True):
+            cur.listing_counter += 1
+            cur = cur.parent
+            if cur is None:
+                break
         return self

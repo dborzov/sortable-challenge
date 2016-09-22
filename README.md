@@ -11,13 +11,13 @@ python solution.py  <path-to-products-file> <path-to-products-file>
 ### The algorithm
 Here is what the script does.
 
-First, it uses the products dataset to build a search tree data structure we would refer to as `decision_tree`.
+First, it uses the products dataset to build a search tree data structure we would refer to as `classifying_tree`.
 
-Then it applies that `decision_tree`'s search method to each listing to see if there is a product match for it.
+Then it applies that `classifying_tree`'s search method to each listing to see if there is a product match for it.
 
-Each node of the `decision_tree` has a unique `match` function that is applied to a listing and returns a boolean indicating whether there is a   match.      
+Each node of the `classifying_tree` has a unique `match` function that is applied to a listing and returns a boolean indicating whether there is a   match.      
 
-When a listing reaches a `decision_tree` node, there are two possibilities:
+When a listing reaches a `classifying_tree` node, there are two possibilities:
 
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
 * Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing.
