@@ -1,25 +1,21 @@
 from build import *
+import sys
+count_listings = 0
+count_identified = 0
 
-i=0
+sys.stderr.write('starting processing listings...')
 for listing in listings:
-    i += 1
-    # if i>3000:
-    #     break
-    with open("tmp/{}.txt".format(str(i)),"w") as log:
-        log.write(json.dumps(listing))
-        try:
-            rr = decision_tree.search(listing)
-            log.write("\nClassified!\n \n")
-            cur = rr
-            while True:
-                cur.listing_counter += 1
-                log.write(cur.label)
-
-                cur = cur.parent
-                if cur is None:
-                    break
-        except UnrecognizedListing as e:
-            log.write("Not recognized!\n \n")
-            log.write(e.__str__())
+    count_listings += 1
+    sys.stderr.write('\rprocessing... {} processed, {} identified'.format(count_listings, count_identified))
+    try:
+        cur = decision_tree.search(listing)
+        count_identified += 1
+        while True:
+            cur.listing_counter += 1
+            cur = cur.parent
+            if cur is None:
+                break
+    except UnrecognizedListing as e:
+        continue
 
 decision_tree.traverse()

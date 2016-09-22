@@ -28,6 +28,10 @@ class TreeNode:
             child.traverse(indent="   | "+indent)
         print indent+ "   -"
 
+    def write_result(self, fd):
+        for child in self.children:
+            child.write_result(fd)
+
     def search(self, listing):
         matches = []
         for child in self.children:
@@ -110,6 +114,8 @@ class ManufacturerNode(TreeNode):
             if not self.undefined_family_node:
                 raise e
             return self.undefined_family_node.search(listing)
+
+
 class ModelNode(TreeNode):
     def __init__(self, result):
         self.label = result["model"]
@@ -126,6 +132,17 @@ class ModelNode(TreeNode):
             if not re.search(r'\b'+ regex + r'\b', key):
                 return False
         return True
+
+    def write_result(self, fd):
+        if len(self.listings)==0:
+            return
+        result = {
+            "product_name": self.result["product_name"],
+            "listings": self.listings
+        }
+        result_json = json.dumps(result)
+        fd.write(result_json)
+        fd.write("\n")
 
     def traverse(self, indent=""):
         print indent + self.label + "[{}]".format(len(self.listings))
