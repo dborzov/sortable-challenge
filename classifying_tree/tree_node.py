@@ -1,4 +1,4 @@
-import re
+import re, json
 
 class UnrecognizedListing(Exception):
     pass

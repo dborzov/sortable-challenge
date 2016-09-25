@@ -1,5 +1,5 @@
 from classifying_tree import JSONL, tree, add_product, UnrecognizedListing
-import sys, getopt
+import sys, getopt, json
 
 # parse cli arguments for options
 jsonl_path_products = './data/products.txt'
