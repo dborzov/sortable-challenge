@@ -51,14 +51,16 @@ def add_product(tree, product):
             mf_node.add_child(new_family_node)
             family_node= new_family_node
     else:
-        family_node = mf_node.undefined_family()
-    assert family_node.__class__ == FamilyNode
+        family_node = mf_node.undefined_family_node
+    assert issubclass(family_node.__class__, FamilyNode)
 
     model_label = product.get("model", "").lower().rstrip()
     if not model_label:
         return False
+    model_node = family_node.apply_product({"title": model_label})
+    if not issubclass(model_node.__class__, FamilyNode):
+        # there is already a matching model here, wont be creating duplicates
+         return model_node
     model_node = ModelNode(product)
     family_node.add_child(model_node)
-    for node in [tree, mf_node, family_node]:
-        node.product_counter += 1
-    return family_node
+    return model_node
