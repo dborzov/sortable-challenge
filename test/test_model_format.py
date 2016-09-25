@@ -1,27 +1,27 @@
 import unittest
 
-class TestNoFamilyProduct(unittest.TestCase):
+class TestModelFormat(unittest.TestCase):
     """
      When a product json
      has no defined `family` field,
      it should go under the
      undefined_family_node
     """
-
-
     def setUp(self):
         from classifying_tree import Tree, add_product
         self.product = {
-            "product_name":"Olympus_mju_9010",
-            "manufacturer":"Olympus",
-            "model":"mju 9010",
-            "announced-date":"2010-01-06T19:00:00.000-05:00"
+            "product_name":"HP_Photosmart_C30",
+            "manufacturer":"HP",
+            "model":"C30",
+            "family":"Photosmart",
+            "announced-date":"1998-10-25T19:00:00.000-05:00"
         }
+
         self.listing = {
-            "currency": "CAD",
-            "manufacturer": "Olympus",
-            "price": "266.09",
-            "title": "Olympus MJU 9010 12MP Digital Camera with 7x Dual Image Stabilized Zoom & 2.7\" LCD"
+            "title":"HP PhotoSmart C30 - Digital camera - compact - 1.0 Mpix - supported memory: CF",
+            "manufacturer":"Hewlett Packard",
+            "currency":"USD",
+            "price":"19.99"
         }
         self.tree = Tree()
         self.product_node = add_product(self.tree, self.product)
@@ -34,7 +34,7 @@ class TestNoFamilyProduct(unittest.TestCase):
         )
         self.assertIsInstance(
             self.product_node.parent,
-            classifying_tree.tree_node.NoFamilyNode
+            classifying_tree.tree_node.FamilyNode
         )
         self.assertIsInstance(
             self.product_node.parent.parent,
@@ -42,7 +42,7 @@ class TestNoFamilyProduct(unittest.TestCase):
         )
         self.assertIsInstance(
             self.product_node.parent.parent.parent,
-            classifying_tree.tree_node.TreeNode
+            classifying_tree.tree_node.Tree
         )
         self.assertIs(
             self.product_node.parent.parent.parent,
@@ -51,12 +51,13 @@ class TestNoFamilyProduct(unittest.TestCase):
 
     def test_tree_structure(self):
         self.assertEqual(len(self.product_node.parent._children), 1, msg="family level")
-        self.assertEqual(len(self.product_node.parent.parent._children), 1, msg="mftr level")
+        self.assertEqual(len(self.product_node.parent.parent._children), 2, msg="mftr level")
 
 
     def test_product_counter(self):
         self.assertEqual(self.tree.product_counter, 1)
 
     def test_match(self):
+        # import pdb; pdb.set_trace()
         match = self.tree.search(self.listing)
         self.assertIs(match, self.product_node)

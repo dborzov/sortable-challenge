@@ -3,33 +3,8 @@ Parse the products dataset to
 build DecisionTree
 """
 
-from tree_node import TreeNode, ManufacturerNode, FamilyNode, ModelNode, UnrecognizedListing
+from tree_node import Tree, TreeNode, ManufacturerNode, FamilyNode, ModelNode, UnrecognizedListing
 
-MANUFACTURER_SPECIAL_CASES = {
-  "general electric": set([
-    "general[\s-]*electric",
-    "ge"
-  ]),
-  "fujifilm": set([
-    "fuji[\s-]*film",
-    "fuji"
-  ]),
-  "hp": set([
-    "hp",
-    "hewlett[\s-]*packard"
-  ]),
-  "konica minolta": set([
-    "konica[\s-]*minolta",
-    "konica",
-    "minolta"
-  ])
-}
-
-tree = TreeNode("root")
-
-for mf_name, mf_regexes in MANUFACTURER_SPECIAL_CASES.iteritems():
-    mf_node = ManufacturerNode(mf_name, mf_regexes)
-    tree.add_child(mf_node)
 
 def add_product(tree, product):
     # for given product, identify the manufacturer's node
@@ -37,7 +12,7 @@ def add_product(tree, product):
     if not mf_label:
         return False
     mf_node = tree.apply_product({"manufacturer": mf_label})
-    if mf_node.__class__ ==TreeNode:
+    if mf_node.__class__ ==Tree:
         # if the manufacturer node does not exist, create one
         mf_node = ManufacturerNode(mf_label, [mf_label])
         tree.add_child(mf_node)

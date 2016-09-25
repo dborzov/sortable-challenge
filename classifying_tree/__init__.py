@@ -1,4 +1,4 @@
-from build import tree, add_product, UnrecognizedListing
+from build import Tree, add_product, UnrecognizedListing
 import json
 
 class JSONL:

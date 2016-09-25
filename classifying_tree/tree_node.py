@@ -133,7 +133,7 @@ class ModelNode(TreeNode):
         self.label = result["model"]
         self.result = result
         self.regexes = []
-        for token in self.result["model"].split():
+        for token in self.result["model"].lower().split():
                 self.regexes.append(token.replace("-","[-\s]*"))
         self.listings = []
         self.listing_counter = 0
@@ -158,6 +158,8 @@ class ModelNode(TreeNode):
 
     def traverse(self, indent=""):
         print indent + self.label + "[{}]".format(len(self.listings))
+        if self.regexes:
+            print indent+ " (regex matchers: \"{}\")".format("\", \"".join(self.regexes))
 
     def search(self, listing):
         self.listings.append(listing)
@@ -171,3 +173,30 @@ class ModelNode(TreeNode):
 
     def add_child(self):
         raise StandardError("Cant add children nodes to model node")
+
+MANUFACTURER_SPECIAL_CASES = {
+  "general electric": set([
+    "general[\s-]*electric",
+    "ge"
+  ]),
+  "fujifilm": set([
+    "fuji[\s-]*film",
+    "fuji"
+  ]),
+  "hp": set([
+    "hp",
+    "hewlett[\s-]*packard"
+  ]),
+  "konica minolta": set([
+    "konica[\s-]*minolta",
+    "konica",
+    "minolta"
+  ])
+}
+
+class Tree(TreeNode):
+    def __init__(self):
+        TreeNode.__init__(self,"root")
+        for mf_name, mf_regexes in MANUFACTURER_SPECIAL_CASES.iteritems():
+            mf_node = ManufacturerNode(mf_name, mf_regexes)
+            self.add_child(mf_node)

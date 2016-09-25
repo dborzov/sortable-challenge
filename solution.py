@@ -1,4 +1,4 @@
-from classifying_tree import JSONL, tree, add_product, UnrecognizedListing
+from classifying_tree import JSONL, Tree, add_product, UnrecognizedListing
 import sys, getopt, json
 
 # parse cli arguments for options
@@ -18,6 +18,7 @@ for opt, val in opts:
 # we will log progress to stderr by default
 log = sys.stderr
 
+tree = Tree()
 # parse products file and add products to the classyfying tree
 count_products = 0
 log.write('parsing products...')
