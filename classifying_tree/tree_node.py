@@ -1,4 +1,5 @@
 import re, json
+import matching
 
 class UnrecognizedListing(Exception):
     pass
@@ -129,8 +130,8 @@ class ManufacturerNode(BaseNode):
     def assign_child(self, family_label):
         if not re.search("\w", family_label):
             return self.undefined_family_node
-        tokens = [t for t in family_label.replace('-',' ').split()]
-        variants = [" ".join(tokens), "-".join(tokens), "".join(tokens)]
+        tokens = matching.extract_tokens(family_label)
+        variants = matching.generate_variants(tokens)
         regex = "[-\s]*".join(tokens)
         for v in variants:
             for child in self._children:
