@@ -22,6 +22,12 @@ When a listing reaches a `classifying_tree` node, there are two possibilities:
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
 * Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing.
 
+### Tests
+To run the tests for the given solution, `cd` into the solution's root directory and run:
+```
+python -m unittest discover -v
+```
+
 # The process
 This section describes my reasoning and thought process of arriving at the given solution.
 
