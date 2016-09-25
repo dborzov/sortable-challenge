@@ -25,7 +25,6 @@ class TestNoFamilyProduct(unittest.TestCase):
         from classifying_tree import tree, add_product
         self.tree = tree
         self.product_node = add_product(self.tree, self.product)
-        # self.match = tree.search(self.listing)
 
     def test_product_node_position(self):
         import classifying_tree.tree_node
@@ -58,5 +57,6 @@ class TestNoFamilyProduct(unittest.TestCase):
     def test_product_counter(self):
         self.assertEqual(self.tree.product_counter, 1)
 
-    # def test_debug(self):
-    #     import pdb; pdb.set_trace()
+    def test_match(self):
+        match = self.tree.search(self.listing)
+        self.assertIs(match, self.product_node)
