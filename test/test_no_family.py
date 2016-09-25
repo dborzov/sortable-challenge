@@ -42,7 +42,7 @@ class TestNoFamilyProduct(unittest.TestCase):
         )
         self.assertIsInstance(
             self.product_node.parent.parent.parent,
-            classifying_tree.tree_node.TreeNode
+            classifying_tree.tree_node.BaseNode
         )
         self.assertIs(
             self.product_node.parent.parent.parent,

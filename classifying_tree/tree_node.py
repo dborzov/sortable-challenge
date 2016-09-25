@@ -9,8 +9,8 @@ class NoMatchesForListing(UnrecognizedListing):
 class AmbiguousMatchesForListing(UnrecognizedListing):
     pass
 
-class TreeNode:
-    """ Base class for tree nodes, also tree root node class """
+class BaseNode:
+    """ Base class for tree nodes """
     def __init__(self, label):
         self._children = []
         self.label = label
@@ -56,7 +56,7 @@ class TreeNode:
             })
         return matches[0].search(listing)
 
-    def apply_product(self, product):
+    def check_4_collisions(self, product):
         for child in self._children:
             if child.match(product):
                 return child
@@ -67,10 +67,10 @@ class TreeNode:
         node.parent = self
 
 
-class FamilyNode(TreeNode):
+class FamilyNode(BaseNode):
     """ Hold products with the same product family """
     def __init__(self, label, regexes):
-        TreeNode.__init__(self, "Is family \"{}\"?".format(label))
+        BaseNode.__init__(self, "Is family \"{}\"?".format(label))
         escaped_regexes = set([el.lower().rstrip() for el in regexes])
         self.regexes = escaped_regexes
 
@@ -82,7 +82,7 @@ class FamilyNode(TreeNode):
         return False
 
     def add_child(self, node):
-        TreeNode.add_child(self, node)
+        BaseNode.add_child(self, node)
         cur = node.parent
         while not cur is None:
             cur.product_counter += 1
@@ -92,21 +92,21 @@ class FamilyNode(TreeNode):
 class NoFamilyNode(FamilyNode):
     """ Products with empty family field go under this node"""
     def __init__(self):
-        TreeNode.__init__(self, "Is family undefined?")
+        BaseNode.__init__(self, "Is family undefined?")
 
     def match(self, listing):
         return False
 
-class ManufacturerNode(TreeNode):
+class ManufacturerNode(BaseNode):
     def __init__(self, label, regexes):
-        TreeNode.__init__(self, "Is manufacturer \"{}\"?".format(label))
+        BaseNode.__init__(self, "Is manufacturer \"{}\"?".format(label))
         escaped_regexes = set([el.lower().rstrip() for el in regexes])
         self.regexes = escaped_regexes
         self.undefined_family_node = NoFamilyNode()
         self.add_child(self.undefined_family_node)
 
     def traverse(self, indent=""):
-        TreeNode.traverse(self,indent=indent)
+        BaseNode.traverse(self,indent=indent)
 
     def match(self, listing):
         key = listing.get("manufacturer","").lower().rstrip()
@@ -118,17 +118,31 @@ class ManufacturerNode(TreeNode):
                 return True
         return False
 
-
     def search(self, listing):
         try:
-            return TreeNode.search(self, listing)
+            return BaseNode.search(self, listing)
         except NoMatchesForListing as e:
             if self.undefined_family_node.product_counter==0:
                 raise e
             return self.undefined_family_node.search(listing)
 
+    def assign_child(self, family_label):
+        if not re.search("\w", family_label):
+            return self.undefined_family_node
+        tokens = [t for t in family_label.replace('-',' ').split()]
+        variants = [" ".join(tokens), "-".join(tokens), "".join(tokens)]
+        regex = "[-\s]*".join(tokens)
+        for v in variants:
+            for child in self._children:
+                if child.match({"title":v}):
+                    child.regexes.add(regex)
+                    return child
+        new_node = FamilyNode(family_label, [regex])
+        self.add_child(new_node)
+        return new_node
 
-class ModelNode(TreeNode):
+
+class ModelNode(BaseNode):
     def __init__(self, result):
         self.label = result["model"]
         self.result = result
@@ -194,9 +208,9 @@ MANUFACTURER_SPECIAL_CASES = {
   ])
 }
 
-class Tree(TreeNode):
+class Tree(BaseNode):
     def __init__(self):
-        TreeNode.__init__(self,"root")
+        BaseNode.__init__(self,"root")
         for mf_name, mf_regexes in MANUFACTURER_SPECIAL_CASES.iteritems():
             mf_node = ManufacturerNode(mf_name, mf_regexes)
             self.add_child(mf_node)
