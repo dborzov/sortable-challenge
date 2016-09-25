@@ -25,7 +25,7 @@ for product in JSONL(jsonl_path_products):
     log.write('\rparsing products... {} parsed'.format(count_products))
     count_products += 1
     add_product(tree, product)
-log.write('\r{} products parsed!{}\n'.format(count_products," "*10))
+log.write('\r{count_products} products parsed, the classifying_tree is built!\n'.format(**locals()))
 
 # search for each listing with the classifying_tree
 count_listings, count_identified = 0, 0
