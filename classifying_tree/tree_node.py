@@ -98,6 +98,7 @@ class NoFamilyNode(FamilyNode):
     def match(self, listing):
         return False
 
+
 class ManufacturerNode(BaseNode):
     def __init__(self, label, regexes):
         BaseNode.__init__(self, "Is manufacturer \"{}\"?".format(label))
@@ -132,7 +133,7 @@ class ManufacturerNode(BaseNode):
             return self.undefined_family_node
         tokens = matching.extract_tokens(family_label)
         variants = matching.generate_variants(tokens)
-        regex = "[-\s]*".join(tokens)
+        regex = matching.tokens2regex(tokens)
         for v in variants:
             for child in self._children:
                 if child.match({"title":v}):
@@ -147,9 +148,7 @@ class ModelNode(BaseNode):
     def __init__(self, result):
         self.label = result["model"]
         self.result = result
-        self.regexes = []
-        for token in self.result["model"].lower().split():
-                self.regexes.append(token.replace("-","[-\s]*"))
+        self.regexes = [matching.label2regex(result["model"])]
         self.listings = []
         self.listing_counter = 0
 
