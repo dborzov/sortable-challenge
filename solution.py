@@ -2,9 +2,9 @@ from classifying_tree import JSONL, Tree, add_product, UnrecognizedListing
 import sys, getopt, json
 
 # parse cli arguments for options
-jsonl_path_products = './data/products.txt'
-jsonl_path_listings = './data/listings.txt'
-jsonl_path_results = 'results.jsonl'
+jsonl_path_products = './products.txt'
+jsonl_path_listings = './listings.txt'
+jsonl_path_results = './results.jsonl'
 opts, _ = getopt.getopt(sys.argv[1:],"p:l:r:", ["products=","listings=","results="])
 for opt, val in opts:
     if opt in ["-p", "--products"]:

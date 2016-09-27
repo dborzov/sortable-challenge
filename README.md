@@ -1,15 +1,32 @@
 My take at Sortable's listing matching challenge.
 
-# The solution
-The script is written in Python 2.7 which should be available on most Linux and MacOSX machines by default.
+# Running the script
+The script is written in Python 2.7 which tends to be available on most Linux distributions by default (on MacOSX too). Please refer to, for example, instructions [here](http://docs.python-guide.org/en/latest/) for details on how to install Python if it is not. No python packages outside of the standard library are used.
 
-To execute it, clone the repo and run:
+To execute it, clone the repo, `cd` into it and run:
 ```
-python solution.py  <path-to-products-file> <path-to-products-file>
+python solution.py  [OPTIONS]
+```
+The supported optional options values enable customizing the file locations to be used:
+```
+-p <path-to-products-file>, <pwd>/products.txt path is used if not specified
+-l <path-to-listings-file>, listings.txt path is used if not specified
+-r desired results file, results.jsonl path is used if not specified
+```
+The results are written to a JSONL file as specified. The script also outputs short progress bar-style messages and the summary to STDERR during execution:
+```
+743 products parsed, the classifying_tree is built!
+processing listings... 20196 processed, 7598 identified
+ Done!
+   *  processed 743 products
+   * 20196 listings
+   *  of those identified 7599 listings
 ```
 
-### The algorithm
-Here is what the script does.
+The products with no matching listings are not included in the results file.
+
+# Overview
+Here is the approach the script uses.
 
 First, it uses the products dataset to build a search tree data structure we would refer to as `classifying_tree`.
 
@@ -29,8 +46,6 @@ python -m unittest discover -v
 ```
 
 # The process
-This section describes my reasoning and thought process of arriving at the given solution.
-
 The general outline is this:
 
 * **Data Exploration**: the first and the crucial stage is to look at the given sample dataset, go through several examples "by hand" and try learning about the character of the problem as much as we can
@@ -72,5 +87,3 @@ The following two constraints:
 * The space of the classification outcomes for each individual listing is vast: in our case it can be any of almost a thousand of the provided product entries (as opposed to, say, a yes/no type of classification problem)
 
 That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.         
-
-### Stage 3: Implementation
