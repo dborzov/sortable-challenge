@@ -3,7 +3,7 @@ My take at Sortable's listing matching challenge.
 # Running the script
 The script is written in Python 2.7 which tends to be available on most Linux distributions by default (on MacOSX too). Please refer to, for example, instructions [here](http://docs.python-guide.org/en/latest/) for details on how to install Python if it is not. No packages outside of the standard library are used so all that is needed  in most cases is to clone the repo.
 
-To execute it, clone the repo, `cd` into the repo's directrory and run:
+To run it, clone the repo, `cd` into the repo's directory and run:
 ```
 python solution.py  [OPTIONS]
 ```
@@ -39,9 +39,9 @@ When a listing reaches a `classifying_tree` node, there are two possibilities:
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
 * Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing.
 
-Each product's tree node keeps track of the listings it was matched to. We traverse the tree one more time to print out the list of products along with the listings it was matched to  
+Each product's tree node keeps track of the listings it was matched to. After going through all the listings, we traverse the tree to print out the list of products along with the listings it was matched to and output it as JSONL.
 
-### Tests
+## Tests
 The script was written using the TDD approach. The script comes with two sets of tests:
 
 * `test` directory contains the **functional tests**. That usually includes the algorithm being applied to one-two products and listings to assure some specific behaviour
@@ -53,7 +53,7 @@ To run the tests use:
 python -m unittest discover -v
 ```
 
-# The process
+# The process used
 The general outline was this:
 
 * **Data Exploration**: the first and the crucial stage is to look at the given sample dataset, go through several examples "by hand" and try learning about the character of the problem as much as we can
@@ -70,6 +70,7 @@ The following two constraints:
 * The space of the classification outcomes for each individual listing is vast: in our case it can be any of almost a thousand of the provided product entries (as opposed to, say, a yes/no type of classification problem)
 
 That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.
+
 
 ## Model and family are a weak identifiers for products
 While the pair of `family`/`model` field values is unique for all the product entries within the given dataset, looking at them in detail shows that the value collisions are very much a possibility.
