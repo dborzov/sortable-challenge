@@ -64,11 +64,11 @@ Once on the family level, we get down to identifying individual models.
 
 Here are some features of the node's behavior:
 
-* There are some special cases for manufacturer matchers that take into account things like *HP* being the same thing as *hewlett[\s-]\*packard* or *Konica* being now the same thing as *Minolta*.
+* There are some special cases for manufacturer matchers that take into account things like *HP* being the same thing as *Hewlett-Packard* or *Konica* being now the same thing as *Minolta*.
 * When a product is added to the tree, we check for collisions on each level (Manufacturer, Family, Model) using the same search method we apply to listings. That lets us identify attempting to add one product several times and avoid matching collisions on each level.
 
 ## Tests
-The script was written using the TDD approach. The script comes with two sets of tests:
+The script comes with two sets of tests:
 
 * `test` directory contains the **functional tests**. That usually includes the algorithm being applied to one-two products and listings to assure some specific behaviour
 
