@@ -37,9 +37,35 @@ Each node of the `classifying_tree` has a unique `match` function that is applie
 When a listing reaches a `classifying_tree` node, there are two possibilities:
 
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
-* Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing.
+* Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing. The reason we toss out the listings that get several matches is we treat this ambiguity
 
 Each product's tree node keeps track of the listings it was matched to. After going through all the listings, we traverse the tree to print out the list of products along with the listings it was matched to and output it as JSONL.
+
+## Structure of the classifying tree
+Here is a diagram:
+
+```
+Root -> Manufacturer matchers ->     Family matchers -> Models
+  |
+  |--- Sony ----------------------|- No family -------- M300
+  |                               |- Cybershot -------- S30
+  |
+  |--- Canon-----------------------No family |
+                                             |-------- F40
+                                             |-------- F50
+```
+We see that root's parent nodes are manufacturer matchers. That is, first, we attempt to identify a manufacturer in a listing.
+
+Once the manufacturer is identified, we try to identify the listing's family. That is, each `ManufacturerNode` of the tree has family matchers as it's children (`FamilyNode` nodes).
+
+There is special `FamilyNode` for products with undefined family field value (we will refer to it as a `NoFamilyNode` here). The manufacturer's matching method thus is a bit different from the other node's matching procedure: if no family value was matched and `NoFamilyNode` is not empty (that is, has some product leave nodes), we traverse down to that node instead of declaring the search failed.
+
+Once on the family level, we get down to identifying individual models.
+
+Here are some features of the node's behavior:
+
+* There are some special cases for manufacturer matchers that take into account things like *HP* being the same thing as *hewlett[\s-]*packard* or *Konica* being now the same thing as *Minolta*.
+* When a product is added to the tree, we check for collisions on each level (Manufacturer, Family, Model) using the same search method we apply to listings. That lets us identify attempting to add one product several times and avoid matching collisions on each level.
 
 ## Tests
 The script was written using the TDD approach. The script comes with two sets of tests:

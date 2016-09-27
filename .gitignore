@@ -2,4 +2,6 @@ data/
 tmp/
 *.pyc
 sets/listings_by_m/
+products.txt
+listings.txt
 results.jsonl

@@ -1,12 +1,12 @@
 """
-Parse the products dataset to
-build DecisionTree
+Functions that help building the tree
 """
 
 from tree_node import Tree, BaseNode, ManufacturerNode, FamilyNode, ModelNode, UnrecognizedListing
 
 
 def add_product(tree, product):
+    """ add a product to the classifying tree """
     # for given product, identify the manufacturer's node
     mf_label = product.get("manufacturer", "").lower().rstrip()
     if not mf_label:

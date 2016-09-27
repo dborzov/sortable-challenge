@@ -11,7 +11,7 @@ class AmbiguousMatchesForListing(UnrecognizedListing):
     pass
 
 class BaseNode:
-    """ Base class for tree nodes """
+    """ Base class for classifying tree nodes """
     def __init__(self, label):
         self._children = []
         self.label = label
@@ -21,6 +21,7 @@ class BaseNode:
         self.parent = None
 
     def traverse(self, indent=""):
+        """ prints the node's summary along with it's children """
         print
         print indent+ "{} [{} ps, {} ls]".format(self.label, self.product_counter, self.listing_counter)
         if self.regexes:
@@ -34,10 +35,15 @@ class BaseNode:
         print indent+ "   -"
 
     def write_result(self, fd):
+        """
+           recursively writes all the children's products with matched listings
+           into fd file descriptor as jsonl
+        """
         for child in self._children:
             child.write_result(fd)
 
     def search(self, listing):
+        """ searches for matching products for a given listing """
         matches = []
         for child in self._children:
             if child.match(listing):
@@ -69,7 +75,7 @@ class BaseNode:
 
 
 class FamilyNode(BaseNode):
-    """ Hold products with the same product family """
+    """ Holds products with the same product family """
     def __init__(self, label, regexes):
         BaseNode.__init__(self, "Is family \"{}\"?".format(label))
         escaped_regexes = set([el.lower().rstrip() for el in regexes])

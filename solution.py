@@ -32,9 +32,9 @@ log.write('\r{count_products} products parsed, the classifying_tree is built!\n'
 count_listings, count_identified = 0, 0
 for listing in JSONL(jsonl_path_listings):
     count_listings += 1
-    log.write('\rprocessing listings... {} processed, {} identified'.format(count_listings, count_identified))
     try:
         cur = tree.search(listing)
+        log.write('\rprocessing listings... {} processed, {} identified'.format(count_listings, count_identified))
         count_identified += 1
     except UnrecognizedListing as e:
         continue
