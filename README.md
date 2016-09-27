@@ -1,22 +1,22 @@
 My take at Sortable's listing matching challenge.
 
 # Running the script
-The script is written in Python 2.7 which tends to be available on most Linux distributions by default (on MacOSX too). Please refer to, for example, instructions [here](http://docs.python-guide.org/en/latest/) for details on how to install Python if it is not. No python packages outside of the standard library are used.
+The script is written in Python 2.7 which tends to be available on most Linux distributions by default (on MacOSX too). Please refer to, for example, instructions [here](http://docs.python-guide.org/en/latest/) for details on how to install Python if it is not. No packages outside of the standard library are used so all that is needed  in most cases is to clone the repo.
 
-To execute it, clone the repo, `cd` into it and run:
+To execute it, clone the repo, `cd` into the repo's directrory and run:
 ```
 python solution.py  [OPTIONS]
 ```
-The supported optional options values enable customizing the file locations to be used:
+The supported options enable customizing the file locations that will be used:
 ```
 -p <path-to-products-file>, <pwd>/products.txt path is used if not specified
--l <path-to-listings-file>, listings.txt path is used if not specified
--r desired results file, results.jsonl path is used if not specified
+-l <path-to-listings-file>, <pwd>/listings.txt path is used if not specified
+-r <path-to-output-results-file>, <pwd>/results.jsonl path is used if not specified
 ```
-The results are written to a JSONL file as specified. The script also outputs short progress bar-style messages and the summary to STDERR during execution:
+The results are written to a JSONL file as specified. The script also outputs (to STDERR) short progress messages during execution and a short summary at the end:
 ```
 743 products parsed, the classifying_tree is built!
-processing listings... 20196 processed, 7598 identified
+processing listings... 20196 processed, 7599 identified
  Done!
    *  processed 743 products
    * 20196 listings
@@ -26,7 +26,7 @@ processing listings... 20196 processed, 7598 identified
 The products with no matching listings are not included in the results file.
 
 # Overview
-Here is the approach the script uses.
+Here is the summary of the approach the script uses.
 
 First, it uses the products dataset to build a search tree data structure we would refer to as `classifying_tree`.
 
@@ -39,22 +39,37 @@ When a listing reaches a `classifying_tree` node, there are two possibilities:
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
 * Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing.
 
+Each product's tree node keeps track of the listings it was matched to. We traverse the tree one more time to print out the list of products along with the listings it was matched to  
+
 ### Tests
-To run the tests for the given solution, `cd` into the solution's root directory and run:
+The script was written using the TDD approach. The script comes with two sets of tests:
+
+* `test` directory contains the **functional tests**. That usually includes the algorithm being applied to one-two products and listings to assure some specific behaviour
+
+* `classifying_tree/test_*.py` contain some **unit tests**
+
+To run the tests use:
 ```
 python -m unittest discover -v
 ```
 
 # The process
-The general outline is this:
+The general outline was this:
 
 * **Data Exploration**: the first and the crucial stage is to look at the given sample dataset, go through several examples "by hand" and try learning about the character of the problem as much as we can
 * **Deciding on the approach**: We then attempt to formalize what we learned and come up with an approach appropriate for the given problem
 * **Implementation**: We write the code and unit-test its components to make sure all the parts behave as intended
-* At last, we document what we did and why
+* **Documenting**: At last, we document what we did and why
 
-### Stage 1: Data exploration
-We look at the given datasets. Below are some observations worth highlighting.
+### Data exploration observations
+Below are some observations this solution was built upon.
+
+##### Not a good problem for probabilistic approaches
+The following two constraints:
+* The primary specified requirement in the problem statement is to minimize the number of wrong matches (as opposed to, say, have the largest possible number of correct matches)
+* The space of the classification outcomes for each individual listing is vast: in our case it can be any of almost a thousand of the provided product entries (as opposed to, say, a yes/no type of classification problem)
+
+That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.
 
 ##### Model and family are a weak identifiers for products
 While the pair of `family`/`model` field values is unique for all the product entries within the given dataset, looking at them in detail shows that the value collisions are very much a possibility.
@@ -80,10 +95,3 @@ manufacturer: Leica, family: NONE, model: Digilux
 manufacturer: Leica, family:Digilux, model: 4.3
 ```
 Common sense suggests that in cases like this, `Digilux` is the appropriate name for the series of products and here the entry with `Digilux` as a `model` value should be ignored.
-
-### Stage 2: Deciding on the approach
-The following two constraints:
-* The primary specified requirement in the problem statement is to minimize the number of wrong matches (as opposed to, say, have the largest possible number of correct matches)
-* The space of the classification outcomes for each individual listing is vast: in our case it can be any of almost a thousand of the provided product entries (as opposed to, say, a yes/no type of classification problem)
-
-That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.         
