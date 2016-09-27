@@ -54,17 +54,17 @@ Root -> Manufacturer matchers ->     Family matchers -> Models
                                              |-------- F40
                                              |-------- F50
 ```
-We see that root's parent nodes are manufacturer matchers. That is, first, we attempt to identify a manufacturer in a listing.
+We see that root's children nodes are manufacturer matchers. That is, first, we attempt to identify a manufacturer in a listing.
 
 Once the manufacturer is identified, we try to identify the listing's family. That is, each `ManufacturerNode` of the tree has family matchers as it's children (`FamilyNode` nodes).
 
-There is special `FamilyNode` for products with undefined family field value (we will refer to it as a `NoFamilyNode` here). The manufacturer's matching method thus is a bit different from the other node's matching procedure: if no family value was matched and `NoFamilyNode` is not empty (that is, has some product leave nodes), we traverse down to that node instead of declaring the search failed.
+There is a special `FamilyNode` for products with undefined family field value (we will refer to it as a `NoFamilyNode` here). The manufacturer's matching method thus is a bit different from the other node's matching procedure: if no family value was matched and `NoFamilyNode` is not empty (that is, has some product leave nodes), we traverse down to that node instead of declaring the search failed.
 
 Once on the family level, we get down to identifying individual models.
 
 Here are some features of the node's behavior:
 
-* There are some special cases for manufacturer matchers that take into account things like *HP* being the same thing as *hewlett[\s-]*packard* or *Konica* being now the same thing as *Minolta*.
+* There are some special cases for manufacturer matchers that take into account things like *HP* being the same thing as *hewlett[\s-]\*packard* or *Konica* being now the same thing as *Minolta*.
 * When a product is added to the tree, we check for collisions on each level (Manufacturer, Family, Model) using the same search method we apply to listings. That lets us identify attempting to add one product several times and avoid matching collisions on each level.
 
 ## Tests
