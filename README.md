@@ -61,17 +61,17 @@ The general outline was this:
 * **Implementation**: We write the code and unit-test its components to make sure all the parts behave as intended
 * **Documenting**: At last, we document what we did and why
 
-### Data exploration observations
-Below are some observations this solution was built upon.
+# Data exploration observations
+Below are some observations from my data exploration this solution was built upon.
 
-##### Not a good problem for probabilistic approaches
+## Not a good problem for probabilistic approaches
 The following two constraints:
 * The primary specified requirement in the problem statement is to minimize the number of wrong matches (as opposed to, say, have the largest possible number of correct matches)
 * The space of the classification outcomes for each individual listing is vast: in our case it can be any of almost a thousand of the provided product entries (as opposed to, say, a yes/no type of classification problem)
 
 That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.
 
-##### Model and family are a weak identifiers for products
+## Model and family are a weak identifiers for products
 While the pair of `family`/`model` field values is unique for all the product entries within the given dataset, looking at them in detail shows that the value collisions are very much a possibility.
 
 For example, the model values can be identical:
@@ -86,7 +86,8 @@ and even when they are not, they can be hard to distinguish:
 100 HS (manufacturer: Canon| family: ELPH)
 ```
 
-##### An overlap between family and model fields for products
+
+## An overlap between family and model fields for products
 While it seems that the intention was for the `family` field to refer to the series of the product and for the model to identify individual models within the family, we see that the provided products dataset does not quite adhere to that distinction.
 
 For example, for Leica models, one product's `family` name colliding with another product's `model` name:
@@ -95,3 +96,13 @@ manufacturer: Leica, family: NONE, model: Digilux
 manufacturer: Leica, family:Digilux, model: 4.3
 ```
 Common sense suggests that in cases like this, `Digilux` is the appropriate name for the series of products and here the entry with `Digilux` as a `model` value should be ignored.
+
+## Different separators used interchangeably
+For model and family values, the following different separators are perceived as identical by humans:
+* One word(e.g. Sony Cybershot)
+* Camelcase(e.g. Sony CyberShot)
+* Dashed (e.g. Sony Cyber-shot)
+* With a space (e.g. Sony Cyber shot)
+* With an underscore (e.g. Cyber_shot)
+
+The code accounts for it by recognizing those separators, using them to split the string into "tokens", and matching only those (we are using regex expressions for that).
