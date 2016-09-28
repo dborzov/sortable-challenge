@@ -2,8 +2,8 @@ import re
 
 def extract_tokens(label):
     tokenized_camel_cases = " ".join([t.lower() for t in re.split('(\B[A-Z]+[a-z]*)', label) if not len(t)==0])
-    tokenized_numerics = " ".join([t.lower() for t in re.split('([1-9]+)', tokenized_camel_cases) if not len(t)==0])
-    tokens = [t for t in tokenized_numerics.replace('-',' ').split()]
+    tokenized_numerics = " ".join([t.lower() for t in re.split('(\d+)', tokenized_camel_cases) if not len(t)==0])
+    tokens = [t for t in tokenized_numerics.replace('-',' ').replace('_',' ').split()]
     return tokens
 
 SEPARATORS = [" ", "-", "", "_"]
