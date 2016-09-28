@@ -16,11 +16,11 @@ The supported options enable customizing the file locations that will be used:
 The results are written to a JSONL file as specified. The script also outputs (to STDERR) short progress messages during execution and a short summary at the end:
 ```
 743 products parsed, the classifying_tree is built!
-processing listings... 20196 processed, 7599 identified
+processing listings... 20196 processed, 7600 identified
  Done!
    *  processed 743 products
    * 20196 listings
-   *  of those identified 7599 listings
+   *  of those identified 7600 listings
 ```
 
 The products with no matching listings are not included in the results file.
@@ -37,7 +37,7 @@ Each node of the `classifying_tree` has a unique `match` function that is applie
 When a listing reaches a `classifying_tree` node, there are two possibilities:
 
 * If it is a tree leaf and it has the product attached to it, that means the search succeeded and that product is returned as the classification result for that listing;  
-* Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing. The reason we toss out the listings that get several matches is we treat this ambiguity
+* Otherwise, it is checked for a match against all the children of that node. If there is one match, the listing traverses down the tree to that node. If there is none or several matches, that means the search failed and no products are matched to that listing. The reason we toss out the listings that get several matches is because it means ambiguity and the problem specification prioritizes minimizing the incorrect matches.  
 
 Each product's tree node keeps track of the listings it was matched to. After going through all the listings, we traverse the tree to print out the list of products along with the listings it was matched to and output it as JSONL.
 
