@@ -98,7 +98,7 @@ The following two constraints:
 That mean that this is not a good problem to tackle with any kind of probabilistic or fitness function maximization-based approach. Instead, we will focus on identifying a set of yes/no criteria for each product that would be able to reasonably identify the listing as belonging to that product.
 
 
-## Model and family pari are a weak identifier for a product
+## Model-family pair is a weak identifier for a product
 While the pair of `family`/`model` field values is unique for all the product entries within the given dataset, looking at them in detail shows that the value collisions are very much a possibility.
 
 For example, the model values can be identical:
