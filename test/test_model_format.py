@@ -1,14 +1,11 @@
 import unittest
+from classifying_tree import Tree, add_product
 
 class TestModelFormat(unittest.TestCase):
     """
-     When a product json
-     has no defined `family` field,
-     it should go under the
-     undefined_family_node
+     A basic model identifying case
     """
     def setUp(self):
-        from classifying_tree import Tree, add_product
         self.product = {
             "product_name":"HP_Photosmart_C30",
             "manufacturer":"HP",
@@ -58,6 +55,5 @@ class TestModelFormat(unittest.TestCase):
         self.assertEqual(self.tree.product_counter, 1)
 
     def test_match(self):
-        # import pdb; pdb.set_trace()
         match = self.tree.search(self.listing)
         self.assertIs(match, self.product_node)
