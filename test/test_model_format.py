@@ -3,7 +3,8 @@ from classifying_tree import Tree, add_product
 
 class TestModelFormat(unittest.TestCase):
     """
-     A basic model identifying case
+     A basic model identifying case,
+     testing the proper tree structure
     """
     def setUp(self):
         self.product = {
@@ -39,7 +40,7 @@ class TestModelFormat(unittest.TestCase):
         )
         self.assertIsInstance(
             self.product_node.parent.parent.parent,
-            classifying_tree.tree_node.Tree
+            classifying_tree.tree.Tree
         )
         self.assertIs(
             self.product_node.parent.parent.parent,

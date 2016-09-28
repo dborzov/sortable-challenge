@@ -20,4 +20,4 @@ def label2regex(label):
     return tokens2regex(extract_tokens(label))
 
 def tokens2regex(tokens):
-    return "[-\s]*".join(tokens)
+    return "[-\s_]*".join(tokens)

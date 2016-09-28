@@ -2,8 +2,8 @@
 Functions that help building the tree
 """
 
-from tree_node import Tree, BaseNode, ManufacturerNode, FamilyNode, ModelNode, UnrecognizedListing
-
+from tree_node import BaseNode, ManufacturerNode, FamilyNode, ModelNode, UnrecognizedListing
+from tree import Tree
 
 def add_product(tree, product):
     """ add a product to the classifying tree """

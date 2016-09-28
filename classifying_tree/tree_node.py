@@ -106,6 +106,7 @@ class NoFamilyNode(FamilyNode):
 
 
 class ManufacturerNode(BaseNode):
+    """ Holds and matches the products for a given manufacturer"""
     def __init__(self, label, regexes):
         BaseNode.__init__(self, "Is manufacturer \"{}\"?".format(label))
         escaped_regexes = set([el.lower().rstrip() for el in regexes])
@@ -151,6 +152,7 @@ class ManufacturerNode(BaseNode):
 
 
 class ModelNode(BaseNode):
+    """ A node for one specific product model """
     def __init__(self, result):
         self.label = result["model"]
         self.result = result
@@ -193,30 +195,3 @@ class ModelNode(BaseNode):
 
     def add_child(self):
         raise StandardError("Cant add children nodes to model node")
-
-MANUFACTURER_SPECIAL_CASES = {
-  "general electric": set([
-    "general[\s-]*electric",
-    "ge"
-  ]),
-  "fujifilm": set([
-    "fuji[\s-]*film",
-    "fuji"
-  ]),
-  "hp": set([
-    "hp",
-    "hewlett[\s-]*packard"
-  ]),
-  "konica minolta": set([
-    "konica[\s-]*minolta",
-    "konica",
-    "minolta"
-  ])
-}
-
-class Tree(BaseNode):
-    def __init__(self):
-        BaseNode.__init__(self,"root")
-        for mf_name, mf_regexes in MANUFACTURER_SPECIAL_CASES.iteritems():
-            mf_node = ManufacturerNode(mf_name, mf_regexes)
-            self.add_child(mf_node)
